@@ -68,7 +68,7 @@ RSpec.configure do |config|
   # Config DatabaseCleaner
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
-    DatabeseCleaner.start
+    DatabaseCleaner.start
   end
 
   config.after(:each) do
@@ -79,7 +79,7 @@ RSpec.configure do |config|
   Shoulda::Matchers.configure do |config_shoulda|
     config_shoulda.integrate do |with|
       with.test_framework :rspec
-      with.libary :rails
+      with.library :rails
     end
   end
 end
