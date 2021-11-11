@@ -36,5 +36,14 @@ module Tl
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.generators.system_tests = nil
+    config.generators do |g|
+      g.test_framework false
+      g.stylesheets false
+      g.javascripts false
+      g.helper false
+      g.channel assets: false
+    end
   end
 end
