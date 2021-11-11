@@ -19,6 +19,9 @@ gem 'puma', '~> 5.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
+  gem 'rspec-rails'
+  gem 'shoulda'
+  gem 'database_cleaner'
 end
 
 group :development do
