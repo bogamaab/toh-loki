@@ -14,5 +14,5 @@ WORKDIR $APP_HOME
 ENV BUNDLE_PATH /tl/.gems
 ENV GEM_HOME /tl/.gems
 
-#COPY Gemfile Gemfile.lock $APP_HOME/
+COPY Gemfile Gemfile.lock $APP_HOME/
 RUN gem install bundler whenever
