@@ -7,7 +7,7 @@ class Companies::FindCompanyService
 
   def list_companies
     companies = search_companies
-    return { message: 'No existe ningun registro de este pais' } if companies.blank?
+    return { message: 'No records with this country' } if companies.blank?
 
     companies.map do |company|
       { id: company.ucode, name: company.name, icon: company.icon_url }
