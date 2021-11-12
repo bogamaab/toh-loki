@@ -1,28 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe 'Company will can create and show clean data', type: :request do
-  context 'when the endpoint receive one json' do
-    it 'should return standard format' do
-      request =
-      response = {
+  context 'POST /companies' do
+    let(:file)  { Rack::Test::UploadedFile.new(Rails.root + "spec/factories/jsons/mx.json", 'application/pdf')  }
+    it 'should return standard format with http success' do
+      post '/companies', params: {}
+      result = {
         companies: [
           {
             id: 'TL-1',
             name: 'Uno Dos Tres',
             icon: 'https://google.com'
           }
-        ]
-      }
+        }
 
-      expect(response).to eq(request)
+      expect(response.body).to eq(result)
+      expect(response.status).to eq(201)
+      expect(response).to have_http_status(:created)
     end
 
     it 'should return message error when the file is other format' do
-      response = {
+      result = {
         message: 'A ocurrido un error, ten cuidado por favor.'
       }
 
-      expect(response).to eq(request)
+      expect(response.body).to eq(result)
+      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:success)
     end
   end
 
@@ -32,7 +36,7 @@ RSpec.describe 'Company will can create and show clean data', type: :request do
     let(:companies_us) { create_list(:company, 5, country: 'us') }
 
     it 'should return all info companies in correct format' do
-      response = {
+      result = {
         companies: [
           {
             id: 'TL-1',
@@ -41,14 +45,20 @@ RSpec.describe 'Company will can create and show clean data', type: :request do
           }
         ]
       }
+
+      expect(response.body).to eq(result)
+      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:success)
     end
 
     it 'should return message error when cant find the country' do
-      response = {
+      result = {
         message: 'Pais no encontrado, revisa tu solicitud'
       }
 
-      expect(respose).to eq(request)
+      expect(response.body).to eq(result)
+      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:success)
     end
   end
 end
